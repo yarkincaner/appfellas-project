@@ -1,0 +1,21 @@
+{
+	"name": "react-express-starter",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"server": "npm run dev -w server",
+		"client": "npm run dev -w client",
+		"start": "concurrently \"npm run server\" \"npm run client\""
+	},
+	"author": "",
+	"license": "ISC",
+	"workspaces": [
+		"server",
+		"client"
+	],
+	"devDependencies": {
+		"concurrently": "^8.2.2"
+	}
+}

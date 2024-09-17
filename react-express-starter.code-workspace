@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "./",
+      "name": "project-root"
+    },
+    {
+      "path": "./server",
+      "name": "server"
+    },
+    {
+      "path": "./client",
+      "name": "client"
+    }
+  ]
+  // you can add other settings here
+}
