@@ -5,10 +5,11 @@
 @layer base {
 	html[data-theme='violet'] {
 		--background: 258 100% 93%;
-		--foreground: 0 0% 55%;
+		--foreground: 0 0% 13%;
 		--primary: 270 100% 30%;
 		--primary-foreground: 270 22% 96%;
-		--secondary: 214 96% 59%;
+		--secondary: 273 22% 90%;
+		--secondary-foreground: 270 38% 62%;
 		--card: 270 22% 96%;
 		--card-secondary: 0 0% 100%;
 	}
