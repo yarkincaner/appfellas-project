@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 
 type Book = {
   id: string
@@ -11,7 +10,7 @@ function App() {
 
   useEffect(() => {
     const getBooks = async () => {
-      const response = await fetch('http://localhost:4000/books')
+      const response = await fetch('http://localhost:4000/v1/books')
       const data = await response.json()
       setBooks(data)
     }

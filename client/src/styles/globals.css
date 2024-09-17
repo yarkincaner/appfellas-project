@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html[data-theme='violet'] {
+		--background: 258 100% 93%;
+		--foreground: 0 0% 55%;
+		--primary: 270 100% 30%;
+		--primary-foreground: 270 22% 96%;
+		--secondary: 214 96% 59%;
+		--card: 270 22% 96%;
+		--card-secondary: 0 0% 100%;
+	}
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
