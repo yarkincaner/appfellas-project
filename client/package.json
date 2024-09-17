@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "lucide-react": "^0.441.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
@@ -31,6 +32,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8.4.45",
     "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.6",
     "tailwindcss": "^3.4.10",
     "ts-jest": "^29.2.5",
     "typescript": "^5.5.3",

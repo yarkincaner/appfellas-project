@@ -25,7 +25,13 @@ const envVarsSchema = z.object({
     .string({
       message: 'MongoDB url is required!'
     })
-    .min(1)
+    .min(1),
+  APP_ID: z.string({
+    message: 'Schiphol application id is required'
+  }),
+  APP_KEY: z.string({
+    message: 'Schiphol application key is required'
+  })
 })
 
 const { data, error } = envVarsSchema.safeParse(process.env)
@@ -38,5 +44,7 @@ if (error) {
 export default {
   env: data.NODE_ENV,
   port: data.PORT,
-  dbUrl: data.MONGODB_URL
+  dbUrl: data.MONGODB_URL,
+  appId: data.APP_ID,
+  appKey: data.APP_KEY
 }
