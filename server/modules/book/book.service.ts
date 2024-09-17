@@ -1,4 +1,5 @@
-import books from '../booksData'
+import books from '../../booksData'
+
 export const getAllBooks = async () => {
   // simulate a delay
   const data = await new Promise(resolve =>
