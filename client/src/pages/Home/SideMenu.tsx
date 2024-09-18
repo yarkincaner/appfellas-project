@@ -24,7 +24,7 @@ const MENUS = [
   },
   {
     id: 1,
-    icon: Icons.car,
+    icon: Icons.travel,
     title: 'travel packages',
     imagePath: './menu-images/travel-packages.jpg'
   }
@@ -34,20 +34,22 @@ type Props = {}
 
 const SideMenu: FC<Props> = ({}) => {
   return (
-    <div className='mt-2 grid grid-rows-3 space-y-4'>
+    <div className='grid grid-cols-3 grid-rows-1 items-center justify-center space-x-1 xl:grid-cols-1 xl:grid-rows-3 xl:items-start xl:space-y-4'>
       {MENUS.map(menu => (
         <div
           key={menu.id}
-          className='group relative h-64 w-full overflow-hidden rounded-xl shadow drop-shadow-lg'
+          className='group relative h-12 w-full overflow-hidden rounded-xl shadow drop-shadow-lg xl:h-64'
         >
+          {/* Gives shadow effect on card to make text more visible */}
+          <div className='absolute z-10 size-full bg-gradient-to-t from-black/50' />
           <img
             src={menu.imagePath}
             alt='Car Rentals'
             className='h-full w-full object-cover transition-transform group-hover:scale-105'
           />
-          <div className='absolute bottom-4 left-4 z-10 flex flex-col items-center text-white'>
-            <menu.icon className='mr-2 size-6 self-start' />
-            <span className='text-xl font-bold uppercase tracking-widest'>
+          <div className='absolute bottom-4 left-4 z-10 flex w-full flex-row items-center justify-start text-white xl:flex-col xl:items-start xl:justify-center'>
+            <menu.icon className='mr-1 hidden size-4 self-center sm:block lg:mr-2 lg:size-6 lg:self-start' />
+            <span className='text-[0.6rem] font-bold uppercase tracking-widest sm:text-xs md:text-sm lg:text-base xl:text-xl'>
               {menu.title}
             </span>
           </div>

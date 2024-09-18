@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-	html[data-theme='violet'] {
-		--background: 258 100% 93%;
-		--foreground: 0 0% 13%;
-		--primary: 270 100% 30%;
-		--primary-foreground: 270 22% 96%;
-		--secondary: 273 22% 90%;
-		--secondary-foreground: 270 38% 62%;
-		--card: 270 22% 96%;
-		--card-secondary: 0 0% 100%;
-	}
+  html[data-theme='violet'] {
+    --background: 258 100% 93%;
+    --foreground: 0 0% 13%;
+    --primary: 270 100% 30%;
+    --primary-foreground: 270 22% 96%;
+    --secondary: 273 22% 90%;
+    --secondary-foreground: 270 38% 62%;
+    --card: 270 22% 96%;
+    --card-secondary: 0 0% 100%;
+  }
 }
 
 @layer base {
@@ -21,5 +21,14 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  input[type='date']::-webkit-calendar-picker-indicator {
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    display: block;
+    background: no-repeat;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
   }
 }
