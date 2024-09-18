@@ -18,7 +18,7 @@ const Header = () => {
             <p>Deals</p>
           </span>
           <span className='flex items-center space-x-1 text-sm sm:text-base'>
-            <Icons.earth className='size-5 text-primary' />
+            <Icons.earth className='size-6 fill-primary stroke-white' />
             <p>Discovery</p>
           </span>
         </div>

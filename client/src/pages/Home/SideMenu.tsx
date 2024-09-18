@@ -23,7 +23,7 @@ const MENUS = [
     imagePath: './menu-images/hotels.jpg'
   },
   {
-    id: 1,
+    id: 3,
     icon: Icons.travel,
     title: 'travel packages',
     imagePath: './menu-images/travel-packages.jpg'
@@ -34,17 +34,17 @@ type Props = {}
 
 const SideMenu: FC<Props> = ({}) => {
   return (
-    <div className='grid grid-cols-3 grid-rows-1 items-center justify-center space-x-1 xl:grid-cols-1 xl:grid-rows-3 xl:items-start xl:space-y-4'>
+    <div className='grid grid-cols-3 gap-2 xl:grid-cols-1 xl:grid-rows-3 xl:gap-6'>
       {MENUS.map(menu => (
         <div
           key={menu.id}
-          className='group relative h-12 w-full overflow-hidden rounded-xl shadow drop-shadow-lg xl:h-64'
+          className='group relative h-12 w-full cursor-pointer overflow-hidden rounded-xl shadow drop-shadow-lg xl:h-72'
         >
           {/* Gives shadow effect on card to make text more visible */}
-          <div className='absolute z-10 size-full bg-gradient-to-t from-black/50' />
+          <div className='absolute z-10 h-full w-full bg-gradient-to-t from-black/50' />
           <img
             src={menu.imagePath}
-            alt='Car Rentals'
+            alt={menu.title}
             className='h-full w-full object-cover transition-transform group-hover:scale-105'
           />
           <div className='absolute bottom-4 left-4 z-10 flex w-full flex-row items-center justify-start text-white xl:flex-col xl:items-start xl:justify-center'>
