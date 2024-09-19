@@ -1,4 +1,5 @@
 import BookYourFlight from './BookYourFlight'
+import Filters from './Filters'
 import Flights from './Flights'
 import Header from './Header'
 import SideMenu from './SideMenu'
@@ -14,7 +15,9 @@ export default function Home() {
             <div className='col-span-3'>
               <Flights />
             </div>
-            <div className='col-span-1'>filters</div>
+            <div className='col-span-1'>
+              <Filters />
+            </div>
           </div>
         </div>
         <div className='col-span-2'>
