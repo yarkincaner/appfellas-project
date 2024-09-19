@@ -11,11 +11,13 @@ export default function Home() {
       <div className='mt-6 grid grid-cols-1 xl:grid-cols-9 xl:space-x-8'>
         <div className='order-last col-span-7 mt-4 space-y-6 xl:order-first xl:mt-0'>
           <BookYourFlight />
-          <div className='grid grid-cols-4 gap-2'>
-            <div className='col-span-3'>
+          {/* Make Flights and Filters equal in height */}
+          <div className='flex h-[600px] gap-2'>
+            {/* Set a fixed height or let it grow based on content */}
+            <div className='flex flex-1 basis-3/4 flex-col'>
               <Flights />
             </div>
-            <div className='col-span-1'>
+            <div className='flex flex-1 basis-1/4 flex-col'>
               <Filters />
             </div>
           </div>
