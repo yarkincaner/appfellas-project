@@ -1,7 +1,7 @@
 import RadioGroup from '@/components/RadioGroup'
 import ScrollShadowWrapper from '@/components/ScrollShadowWrapper'
 import Select from '@/components/Select'
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useState } from 'react'
 
 const OPTIONS = [
   {
@@ -50,36 +50,6 @@ type Props = {}
 
 const Filters: FC<Props> = ({}) => {
   const [selectedItem, setSelectedItem] = useState<string>('')
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isBottom, setIsBottom] = useState(false)
-  const scrollRef = useRef<HTMLDivElement>(null)
-
-  const handleScroll = () => {
-    const scrollElement = scrollRef.current
-    if (scrollElement) {
-      const { scrollTop, scrollHeight, clientHeight } = scrollElement
-
-      // Check if the user has scrolled
-      setIsScrolled(scrollTop > 0)
-
-      // Check if the user is at the bottom
-      setIsBottom(scrollTop + clientHeight >= scrollHeight)
-    }
-  }
-
-  useEffect(() => {
-    const scrollElement = scrollRef.current
-    if (scrollElement) {
-      scrollElement.addEventListener('scroll', handleScroll)
-
-      // Initial check on mount
-      handleScroll()
-
-      return () => {
-        scrollElement.removeEventListener('scroll', handleScroll)
-      }
-    }
-  }, [])
 
   return (
     <ScrollShadowWrapper className='no-scrollbar gap-4 px-4'>
