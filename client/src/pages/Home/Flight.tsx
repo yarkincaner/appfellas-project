@@ -22,7 +22,7 @@ const Flight: FC<Props> = ({}) => {
               <p>MXP</p>
             </span>
           </div>
-          <hr className='col-span-2 h-px w-1/2 justify-self-center bg-card-secondary/5' />
+          <div className='col-span-2 h-px w-1/2 justify-self-center bg-foreground' />
           <div className='col-span-2 flex flex-col items-center justify-center justify-self-center'>
             <img
               src='/alitalia-logo.png'
@@ -34,7 +34,7 @@ const Flight: FC<Props> = ({}) => {
               2h 25m (Nonstop)
             </p>
           </div>
-          <hr className='col-span-2 h-px w-1/2 justify-self-center bg-card-secondary/5' />
+          <div className='col-span-2 h-px w-1/2 justify-self-center bg-foreground' />
           <div className='col-span-2 flex flex-col justify-self-end'>
             <span className='flex items-center gap-1 text-card-foreground'>
               <Icons.planeLanding className='size-4' />

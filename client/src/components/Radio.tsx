@@ -28,7 +28,7 @@ const Radio = ({
         name={name}
         defaultChecked={defaultChecked}
         disabled={disabled}
-        className='peer col-start-1 row-start-1 size-3 shrink-0 appearance-none rounded-full border-2 border-primary checked:bg-primary focus:outline-none focus:ring-0 disabled:border-foreground/50'
+        className='peer col-start-1 row-start-1 size-3 shrink-0 appearance-none rounded-full border-2 border-primary checked:bg-primary focus:outline-none focus:ring-0 disabled:border-foreground/50 disabled:bg-transparent'
         onChange={onChange}
         value={value}
       />
