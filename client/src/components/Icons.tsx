@@ -2,6 +2,7 @@ import {
   CalendarDays,
   CarFront,
   Check,
+  ChevronDown,
   Earth,
   Hotel,
   LucideProps,
@@ -35,7 +36,8 @@ const Icons = {
   hotel: Hotel,
   travel: TreePalm,
   check: Check,
-  calendar: CalendarDays
+  calendar: CalendarDays,
+  chevronDown: ChevronDown
 }
 
 export default Icons
