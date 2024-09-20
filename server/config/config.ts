@@ -16,11 +16,14 @@ const envVarsSchema = z.object({
       message: 'MongoDB url is required!'
     })
     .min(1),
-  APP_ID: z.string({
+  SCHIPHOL_ID: z.string({
     message: 'Schiphol application id is required'
   }),
-  APP_KEY: z.string({
+  SCHIPHOL_KEY: z.string({
     message: 'Schiphol application key is required'
+  }),
+  SCHIPHOL_URL: z.string({
+    message: 'Schiphol application url is required'
   })
 })
 
@@ -35,6 +38,7 @@ export default {
   env: data.NODE_ENV,
   port: data.PORT,
   dbUrl: data.MONGODB_URL,
-  appId: data.APP_ID,
-  appKey: data.APP_KEY
+  appId: data.SCHIPHOL_ID,
+  appKey: data.SCHIPHOL_KEY,
+  appUrl: data.SCHIPHOL_URL
 }
