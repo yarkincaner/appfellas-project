@@ -5,7 +5,6 @@ import config from '../../config/config'
 
 export const getAllFlights = catchAsync(async (req: Request, res: Response) => {
   const queryParams = new URLSearchParams(req.query as any).toString()
-
   const query = `${config.appUrl}/flights?${queryParams}`
 
   const flights = await axios.get(query, {
@@ -16,5 +15,6 @@ export const getAllFlights = catchAsync(async (req: Request, res: Response) => {
       ResourceVersion: 'v4'
     }
   })
+
   res.json(flights.data)
 })

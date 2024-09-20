@@ -1,23 +1,26 @@
-import { IOptions, QueryResult } from '../paginate/paginate'
-import { IBookedFlight, IBookedFlightDoc } from './booked-flight.interfaces'
 import BookedFlight from './booked-flight.model'
+import ApiError from '../errors/ApiError'
+import httpStatus from 'http-status'
 
-export const createBookedFlight = async (
-  bookedFlightBody: IBookedFlight
-): Promise<IBookedFlightDoc> => {
-  return BookedFlight.create(bookedFlightBody)
+export const create = async (flightData: any) => {
+  try {
+    // Create a new flight instance using the flightData passed from the controller
+    const bookedFlight = new BookedFlight(flightData)
+
+    // Save the new flight booking to the database
+    await bookedFlight.save()
+
+    return bookedFlight._id // Return the saved document
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message)
+  }
 }
 
-/**
- * Query for booked flights
- * @param {Object} filter - Mongo filter
- * @param {Object} options - Query options
- * @returns {Promise<QueryResult>}
- */
-export const queryBookedFlights = async (
-  filter: Record<string, any>,
-  options: IOptions
-): Promise<QueryResult> => {
-  const bookedFlights = await BookedFlight.paginate(filter, options)
-  return bookedFlights
+export const getAll = async () => {
+  try {
+    const bookedFlights = await BookedFlight.find()
+    return bookedFlights
+  } catch (error) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message)
+  }
 }

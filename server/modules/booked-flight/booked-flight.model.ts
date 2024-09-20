@@ -1,149 +1,130 @@
-import mongoose from 'mongoose'
-import { toJSON } from '../toJSON' // Assuming this plugin converts mongoose to JSON
-import {
-  IBookedFlightDoc,
-  IBookedFlightModel
-} from './booked-flight.interfaces'
-import { paginate } from '../paginate'
+import { Schema, model } from 'mongoose'
 
-const bookedFlightSchema = new mongoose.Schema<
-  IBookedFlightDoc,
-  IBookedFlightModel
->(
+// Sub-schema for Aircraft Type
+const aircraftTypeSchema = new Schema(
   {
-    lastUpdatedAt: {
-      type: String,
-      trim: true
-    },
-    actualLandingTime: {
-      type: String,
-      trim: true
-    },
-    actualOffBlockTime: {
-      type: String,
-      trim: true
-    },
-    aircraftRegistration: {
-      type: String,
-      trim: true
-    },
-    aircraftType: {
-      iataMain: { type: String, trim: true },
-      iataSub: { type: String, trim: true }
-    },
-    baggageClaim: {
-      belts: { type: [String] }
-    },
-    estimatedLandingTime: {
-      type: String,
-      trim: true
-    },
-    expectedTimeBoarding: {
-      type: String,
-      trim: true
-    },
-    expectedTimeGateClosing: {
-      type: String,
-      trim: true
-    },
-    expectedTimeGateOpen: {
-      type: String,
-      trim: true
-    },
-    expectedTimeOnBelt: {
-      type: String,
-      trim: true
-    },
-    expectedSecurityFilter: {
-      type: String,
-      trim: true
-    },
-    flightDirection: {
-      type: String,
-      enum: ['A', 'D'],
-      required: true
-    },
-    flightName: {
-      type: String,
-      trim: true
-    },
-    flightNumber: {
-      type: Number
-    },
-    gate: {
-      type: String,
-      trim: true
-    },
-    pier: {
-      type: String,
-      trim: true
-    },
-    isOperationalFlight: {
-      type: Boolean
-    },
-    mainFlight: {
-      type: String,
-      trim: true
-    },
-    prefixIATA: {
-      type: String,
-      trim: true
-    },
-    prefixICAO: {
-      type: String,
-      trim: true
-    },
-    airlineCode: {
-      type: Number
-    },
-    publicEstimatedOffBlockTime: {
-      type: String,
-      trim: true
-    },
-    publicFlightState: {
-      flightStates: { type: [String] }
-    },
-    route: {
-      destinations: { type: [String] },
-      eu: { type: String, enum: ['S', 'E', 'N'] },
-      visa: { type: Boolean }
-    },
-    scheduleDateTime: {
-      type: String,
-      trim: true
-    },
-    scheduleDate: {
-      type: String,
-      trim: true
-    },
-    scheduleTime: {
-      type: String,
-      trim: true
-    },
-    serviceType: {
-      type: String,
-      trim: true
-    },
-    terminal: {
-      type: Number
-    },
-    schemaVersion: {
-      type: String,
-      trim: true
-    }
+    iataMain: { type: String },
+    iataSub: { type: String }
   },
+  { _id: false }
+)
+
+// Sub-schema for Baggage Claim
+const baggageClaimSchema = new Schema(
   {
-    timestamps: true
-  }
+    belts: [{ type: String }]
+  },
+  { _id: false }
 )
 
-// Add the toJSON and paginate plugins
-bookedFlightSchema.plugin(toJSON)
-bookedFlightSchema.plugin(paginate)
-
-const BookedFlight = mongoose.model<IBookedFlightDoc, IBookedFlightModel>(
-  'BookedFlight',
-  bookedFlightSchema
+// Sub-schema for Checkin Allocations -> Desks -> Checkin Class
+const checkinClassSchema = new Schema(
+  {
+    code: { type: String },
+    description: { type: String }
+  },
+  { _id: false }
 )
+
+const desksSchema = new Schema(
+  {
+    checkinClass: checkinClassSchema,
+    position: { type: Number }
+  },
+  { _id: false }
+)
+
+const rowsSchema = new Schema(
+  {
+    position: { type: String },
+    desks: { type: [desksSchema] }
+  },
+  { _id: false }
+)
+
+const checkinAllocationsSchema = new Schema(
+  {
+    startTime: { type: Date },
+    endTime: { type: Date },
+    rows: { type: [rowsSchema] }
+  },
+  { _id: false }
+)
+
+const remarksSchema = new Schema(
+  {
+    remarks: [{ type: String }]
+  },
+  { _id: false }
+)
+
+// Sub-schema for Route
+const routeSchema = new Schema(
+  {
+    destinations: [{ type: String }],
+    eu: { type: String },
+    visa: { type: Boolean }
+  },
+  { _id: false }
+)
+
+// Sub-schema for Public Flight State
+const publicFlightStateSchema = new Schema(
+  {
+    flightStates: [{ type: String }]
+  },
+  { _id: false }
+)
+
+// Main Flight Schema
+const flightSchema = new Schema(
+  {
+    lastUpdatedAt: { type: Date },
+    actualLandingTime: { type: Date },
+    actualOffBlockTime: { type: Date },
+    aircraftRegistration: { type: String },
+    aircraftType: aircraftTypeSchema,
+    baggageClaim: baggageClaimSchema,
+    checkinAllocations: {
+      checkinAllocations: [checkinAllocationsSchema],
+      remarks: remarksSchema
+    },
+    codeshares: {
+      codeshares: [{ type: String }]
+    },
+    estimatedLandingTime: { type: Date },
+    expectedTimeBoarding: { type: Date },
+    expectedTimeGateClosing: { type: Date },
+    expectedTimeGateOpen: { type: Date },
+    expectedTimeOnBelt: { type: Date },
+    expectedSecurityFilter: { type: String },
+    flightDirection: { type: String }, // "A" or "D"
+    flightName: { type: String },
+    flightNumber: { type: Number },
+    gate: { type: String },
+    pier: { type: String },
+    id: { type: String },
+    isOperationalFlight: { type: Boolean },
+    mainFlight: { type: String },
+    prefixIATA: { type: String },
+    prefixICAO: { type: String },
+    airlineCode: { type: Number },
+    publicEstimatedOffBlockTime: { type: Date },
+    publicFlightState: publicFlightStateSchema,
+    route: routeSchema,
+    scheduleDateTime: { type: Date },
+    scheduleDate: { type: String },
+    scheduleTime: { type: String },
+    serviceType: { type: String },
+    terminal: { type: Number },
+    transferPositions: {
+      transferPositions: [{ type: Number }]
+    },
+    schemaVersion: { type: String }
+  },
+  { timestamps: true }
+)
+
+const BookedFlight = model('BookedFlight', flightSchema)
 
 export default BookedFlight
