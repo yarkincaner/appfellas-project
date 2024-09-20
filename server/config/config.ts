@@ -11,16 +11,6 @@ dotenvExpand.expand(myEnv)
 const envVarsSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']),
   PORT: z.coerce.number().default(4000),
-  MONGODB_USER_NAME: z
-    .string({
-      message: 'MongoDB admin username is required!'
-    })
-    .min(1),
-  MONGODB_USER_PASSWORD: z
-    .string({
-      message: 'MongoDB admin user password is required!'
-    })
-    .min(1),
   MONGODB_URL: z
     .string({
       message: 'MongoDB url is required!'
