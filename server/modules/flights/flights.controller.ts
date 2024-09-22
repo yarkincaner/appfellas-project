@@ -18,3 +18,22 @@ export const getAllFlights = catchAsync(async (req: Request, res: Response) => {
 
   res.json(flights.data)
 })
+
+export const getFlight = catchAsync(async (req: Request, res: Response) => {
+  const id = req.params['id']
+
+  if (typeof id === 'string') {
+    const query = `${config.appUrl}/flights/${id}`
+
+    const flight = await axios.get(query, {
+      headers: {
+        Accept: 'application/json',
+        app_id: config.appId,
+        app_key: config.appKey,
+        ResourceVersion: 'v4'
+      }
+    })
+
+    res.send(flight.data)
+  }
+})
