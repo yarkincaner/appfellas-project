@@ -52,7 +52,7 @@ const MyCombobox: FC<Props> = ({ className, icon, options = [] }) => {
         anchor='bottom'
         transition
         className={cn(
-          'w-[var(--input-width)] rounded-xl bg-white p-1 shadow [--anchor-gap:var(--spacing-1)] empty:invisible',
+          'w-[var(--input-width)] rounded-xl bg-white p-1 shadow [--anchor-gap:var(--spacing-1)] [--anchor-max-height:15rem] empty:invisible',
           'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
         )}
       >
