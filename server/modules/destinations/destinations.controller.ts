@@ -37,7 +37,7 @@ export const getDestination = catchAsync(
         }
       })
 
-      res.send(destination)
+      res.send(destination.data)
     }
   }
 )
