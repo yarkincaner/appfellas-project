@@ -92,16 +92,16 @@ const BookYourFlight: FC<Props> = ({}) => {
                   }
                   options={mappedDestinations!}
                 />
-                <MyCombobox
+                {/* <MyCombobox
                   className='sm:rounded-l-none'
                   icon={
                     <Icons.planeLanding className='size-4 stroke-primary' />
                   }
                   options={mappedDestinations!}
-                />
+                /> */}
               </div>
               <div className='flex flex-col gap-2 sm:flex-row'>
-                <DatePicker className='py-2 sm:rounded-r-none sm:py-0' />
+                {/* <DatePicker className='py-2 sm:rounded-r-none sm:py-0' /> */}
                 <DatePicker className='py-2 sm:rounded-l-none sm:py-0' />
               </div>
             </div>
