@@ -3,12 +3,24 @@ import Card from '@/components/Card'
 import MyCombobox from '@/components/Combobox'
 import DatePicker from '@/components/DatePicker'
 import Icons from '@/components/Icons'
+import { useGetAllDestinations } from '@/lib/queries'
+import { Option } from '@/types/options'
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react'
 import { FC, Fragment } from 'react'
 
 type Props = {}
 
 const BookYourFlight: FC<Props> = ({}) => {
+  const { data: destinations, isLoading } = useGetAllDestinations()
+  let mappedDestinations: Option[]
+
+  if (isLoading) return <div>Loading...</div>
+
+  mappedDestinations = destinations!.map(destination => ({
+    label: destination.publicName?.english || 'Unknown',
+    value: destination.iata || ''
+  }))
+
   return (
     <Card className='space-y-5'>
       <TabGroup>
@@ -53,12 +65,14 @@ const BookYourFlight: FC<Props> = ({}) => {
                   icon={
                     <Icons.planeTakeoff className='size-4 stroke-primary' />
                   }
+                  options={mappedDestinations!}
                 />
                 <MyCombobox
                   className='sm:rounded-l-none'
                   icon={
                     <Icons.planeLanding className='size-4 stroke-primary' />
                   }
+                  options={mappedDestinations!}
                 />
               </div>
               <div className='flex flex-col gap-2 sm:flex-row'>
@@ -76,12 +90,14 @@ const BookYourFlight: FC<Props> = ({}) => {
                   icon={
                     <Icons.planeTakeoff className='size-4 stroke-primary' />
                   }
+                  options={mappedDestinations!}
                 />
                 <MyCombobox
                   className='sm:rounded-l-none'
                   icon={
                     <Icons.planeLanding className='size-4 stroke-primary' />
                   }
+                  options={mappedDestinations!}
                 />
               </div>
               <div className='flex flex-col gap-2 sm:flex-row'>
