@@ -8,29 +8,23 @@ import {
 } from '@headlessui/react'
 import { FC, ReactNode, useState } from 'react'
 import Icons from './Icons'
-
-const people = [
-  { id: 1, name: 'Durward Reynolds' },
-  { id: 2, name: 'Kenton Towne' },
-  { id: 3, name: 'Therese Wunsch' },
-  { id: 4, name: 'Benedict Kessler' },
-  { id: 5, name: 'Katelyn Rohan' }
-]
+import { Option } from '@/types/options'
 
 type Props = {
   className?: string
   icon?: ReactNode
+  options?: Option[]
 }
 
-const MyCombobox: FC<Props> = ({ className, icon }) => {
+const MyCombobox: FC<Props> = ({ className, icon, options = [] }) => {
   const [query, setQuery] = useState('')
-  const [selected, setSelected] = useState(people[1])
+  const [selected, setSelected] = useState(options[0].value)
 
-  const filteredPeople =
+  const filteredOptions =
     query === ''
-      ? people
-      : people.filter(person => {
-          return person.name.toLowerCase().includes(query.toLowerCase())
+      ? options
+      : options.filter(option => {
+          return option.label.toLowerCase().includes(query.toLowerCase())
         })
 
   return (
@@ -62,14 +56,14 @@ const MyCombobox: FC<Props> = ({ className, icon }) => {
           'transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0'
         )}
       >
-        {filteredPeople.map(person => (
+        {filteredOptions.map(option => (
           <ComboboxOption
-            key={person.id}
-            value={person}
+            key={option.value}
+            value={option.value}
             className='group flex cursor-default select-none items-center gap-2 rounded-xl px-3 py-1.5 data-[focus]:bg-secondary data-[focus]:text-primary'
           >
             <Icons.check className='invisible size-4 fill-white group-data-[selected]:visible' />
-            <div className='text-sm/6'>{person.name}</div>
+            <div className='text-sm/6'>{option.label}</div>
           </ComboboxOption>
         ))}
       </ComboboxOptions>
