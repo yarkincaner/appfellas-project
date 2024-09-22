@@ -1,7 +1,8 @@
 import express, { Router } from 'express'
-import flightsRoute from './flights.route'
+import airlinesRoute from './airlines.route'
 import bookedFlightRoute from './booked-flight.route'
 import destinationsRoute from './destinations.route'
+import flightsRoute from './flights.route'
 
 const router = express.Router()
 
@@ -18,6 +19,10 @@ const defaultRoutes: IRoute[] = [
   {
     path: '/destinations',
     route: destinationsRoute
+  },
+  {
+    path: '/airlines',
+    route: airlinesRoute
   },
   {
     path: '/booked-flight',
