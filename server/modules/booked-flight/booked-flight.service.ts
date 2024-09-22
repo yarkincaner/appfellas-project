@@ -12,7 +12,16 @@ export const create = async (flightData: any) => {
 
     return bookedFlight._id // Return the saved document
   } catch (error) {
-    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message)
+    if (error instanceof Error) {
+      // Check if error is actually an instance of Error and has a message property
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message)
+    } else {
+      // Handle unknown type of error gracefully
+      throw new ApiError(
+        httpStatus.INTERNAL_SERVER_ERROR,
+        'An unknown error occurred'
+      )
+    }
   }
 }
 
@@ -21,6 +30,15 @@ export const getAll = async () => {
     const bookedFlights = await BookedFlight.find()
     return bookedFlights
   } catch (error) {
-    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message)
+    if (error instanceof Error) {
+      // Check if error is actually an instance of Error and has a message property
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message)
+    } else {
+      // Handle unknown type of error gracefully
+      throw new ApiError(
+        httpStatus.INTERNAL_SERVER_ERROR,
+        'An unknown error occurred'
+      )
+    }
   }
 }
