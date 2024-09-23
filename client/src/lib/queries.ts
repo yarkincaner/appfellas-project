@@ -1,6 +1,7 @@
+import { today } from '@/config/config'
 import { Airline } from '@/types/airline'
 import { Destination } from '@/types/destination'
-import { FlightType } from '@/types/flight'
+import { FlightFilters, FlightType } from '@/types/flight'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -28,37 +29,56 @@ export const useGetAirlines = () => {
   })
 }
 
-export const useGetFlights = (filters?: {
-  from?: string
-  to?: string
-  departureDate?: string
-  returnDate?: string
-}) => {
+const defaultFilters: FlightFilters = {
+  scheduleDate: today,
+  airline: null,
+  route: null,
+  page: null,
+  sort: null,
+  fromDateTime: null,
+  toDateTime: null
+}
+
+export const useGetFlights = (filters: FlightFilters = defaultFilters) => {
   return useQuery({
-    queryKey: ['get-flights'],
+    queryKey: ['get-flights', filters],
     queryFn: async () => {
       let query = `${process.env.API_BASE_URL_DEVELOPMENT}/v1/flights`
       const searchParams = new URLSearchParams()
 
-      if (filters?.from) {
-        searchParams.append('from', filters.from)
+      // Conditionally append filters to the searchParams
+      if (filters.scheduleDate) {
+        searchParams.append('scheduleDate', filters.scheduleDate)
       }
-
-      if (filters?.to) {
-        searchParams.append('to', filters.to)
+      if (filters.airline) {
+        searchParams.append('airline', filters.airline)
       }
-
-      if (filters?.departureDate) {
-        searchParams.append('departureDate', filters.departureDate)
+      if (filters.route) {
+        searchParams.append('route', filters.route.join(',')) // assuming `route` is an array of IATA codes
       }
-
-      if (filters?.returnDate) {
-        searchParams.append('returnDate', filters.returnDate)
+      if (filters.page) {
+        searchParams.append('page', filters.page.toString())
+      }
+      if (filters.sort) {
+        searchParams.append('sort', filters.sort) // adjust if sort has specific fields
+      }
+      if (filters.fromDateTime) {
+        searchParams.append(
+          'fromDateTime',
+          new Date(filters.fromDateTime).toISOString().split('.')[0]
+        ) // format date as 'yyyy-MM-ddTHH:mm:ss'
+      }
+      if (filters.toDateTime) {
+        searchParams.append(
+          'toDateTime',
+          new Date(filters.toDateTime).toISOString().split('.')[0]
+        )
       }
 
       query = `${query}?${searchParams.toString()}`
-      const response = await axios.get(query)
-      return response.data.flights as FlightType[]
+      console.log('MyQuery', query)
+      // const response = await axios.get(query)
+      // return response.data.flights as FlightType[]
     }
   })
 }

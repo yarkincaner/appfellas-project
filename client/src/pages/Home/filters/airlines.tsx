@@ -3,10 +3,12 @@ import RadioGroup from '@/components/RadioGroup'
 import { useGetAirlines } from '@/lib/queries'
 import { Option } from '@/types/options'
 import { FC, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 type Props = {}
 
 const Airlines: FC<Props> = ({}) => {
+  const [_, setSearchParams] = useSearchParams()
   const { data: airlines, isLoading, error } = useGetAirlines()
   const [selectedItem, setSelectedItem] = useState<string>()
 
@@ -27,7 +29,13 @@ const Airlines: FC<Props> = ({}) => {
       <RadioGroup
         defaultChecked={mappedAirlines[0].value}
         name='airlinesIncluded'
-        onChange={itemValue => setSelectedItem(itemValue)}
+        onChange={itemValue => {
+          setSelectedItem(itemValue)
+          setSearchParams(params => {
+            params.set('airline', itemValue)
+            return params
+          })
+        }}
         options={mappedAirlines}
       />
     </label>

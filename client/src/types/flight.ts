@@ -1,3 +1,5 @@
+import { Destination } from './destination'
+
 export type FlightType = {
   lastUpdatedAt: string // ISO date string
   actualLandingTime: string // ISO date string
@@ -34,3 +36,22 @@ export type FlightType = {
   terminal: number
   schemaVersion: string
 }
+
+export type FlightFilters = {
+  scheduleDate?: string | null
+  airline?: string | null // IATA prefix
+  route?: Array<Destination['iata']> | null
+  page?: number | null
+  sort?: SortOptions | null
+  fromDateTime: string | null
+  toDateTime: string | null
+}
+
+export type SortOptions =
+  | 'flightName'
+  | 'scheduleDate'
+  | 'scheduleTime'
+  | 'flightDirection'
+  | 'mainFlight'
+  | 'airlineCode'
+  | 'id'
