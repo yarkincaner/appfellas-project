@@ -3,14 +3,16 @@ import {
   CarFront,
   Check,
   ChevronDown,
-  Earth,
   Hotel,
+  Info,
   Loader2,
   LucideProps,
   Plane,
   PlaneLanding,
   PlaneTakeoff,
+  Star,
   Tag,
+  TicketsPlane,
   TreePalm
 } from 'lucide-react'
 
@@ -20,6 +22,9 @@ const Icons = {
   planeLanding: PlaneLanding,
   tag: Tag,
   loader: Loader2,
+  star: Star,
+  info: Info,
+  flightTicket: TicketsPlane,
   earth: (props: LucideProps) => (
     <svg
       xmlns='http://www.w3.org/2000/svg'

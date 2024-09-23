@@ -1,6 +1,13 @@
 import Icons from '@/components/Icons'
+import { useNavigate } from 'react-router-dom'
 
 const Header = () => {
+  const navigate = useNavigate()
+
+  const navigateToBookedFlights = () => {
+    navigate('/booked-flights')
+  }
+
   return (
     <div className='grid min-w-full grid-cols-2 items-center'>
       {/* Title */}
@@ -23,7 +30,10 @@ const Header = () => {
           </span>
         </div>
 
-        <span className='flex items-center space-x-2'>
+        <span
+          onClick={navigateToBookedFlights}
+          className='flex cursor-pointer items-center space-x-2 hover:underline'
+        >
           <img
             src='https://api.dicebear.com/9.x/dylan/svg'
             alt='avatar'
