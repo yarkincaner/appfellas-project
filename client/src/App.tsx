@@ -1,5 +1,6 @@
-import Home from '@/pages/Home/Home'
+import { RouterProvider } from 'react-router-dom'
 import Providers from './components/Providers'
+import { router } from './config/router/router'
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
       <main className='flex min-h-screen min-w-full justify-center'>
         <div className='container py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24'>
           <div className='min-w-full rounded-2xl bg-card p-6 shadow'>
-            <Home />
+            <RouterProvider router={router} />
           </div>
         </div>
       </main>

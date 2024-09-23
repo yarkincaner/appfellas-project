@@ -1,15 +1,38 @@
 import { Button } from '@/components/Button'
 import Card from '@/components/Card'
 import Icons from '@/components/Icons'
+import { useGetDestinations } from '@/lib/queries'
+import { FlightType } from '@/types/flight'
 import { FC } from 'react'
 
-type Props = {}
+type Props = {
+  flight: FlightType
+}
 
-const Flight: FC<Props> = ({}) => {
+const Flight: FC<Props> = ({ flight }) => {
+  // const {
+  //   data: destinations,
+  //   isLoading,
+  //   error
+  // } = useGetDestinations({
+  //   from: flight.prefixIATA,
+  //   to: flight.route.destinations[0]
+  // })
+
+  // if (isLoading) {
+  //   return <Icons.loader className='size-4 animate-spin text-primary' />
+  // }
+
+  // if (error) {
+  //   return <div>{error.message}</div>
+  // }
+
   return (
     <>
       <Card className='relative space-y-6 rounded-bl-none'>
-        <h3 className='font-bold'>Milano - Madrid</h3>
+        <h3 className='font-bold'>
+          {flight.prefixIATA} - {flight.route.destinations[0]}
+        </h3>
         <div className='grid grid-cols-10 items-center justify-center space-x-4'>
           <div className='col-span-2 flex flex-col justify-self-start'>
             <span className='flex items-center gap-1 text-card-foreground'>
@@ -19,7 +42,7 @@ const Flight: FC<Props> = ({}) => {
             <p className='font-bold'>7:30 AM</p>
             <span className='flex items-center space-x-1'>
               <p>Airport:</p>
-              <p>MXP</p>
+              <p>{flight.prefixIATA}</p>
             </span>
           </div>
           <div className='col-span-2 h-px w-1/2 justify-self-center bg-foreground' />
@@ -43,7 +66,7 @@ const Flight: FC<Props> = ({}) => {
             <p className='font-bold'>9:55 AM</p>
             <span className='flex items-center space-x-1'>
               <p>Airport:</p>
-              <p>MAD</p>
+              <p>{flight.route.destinations[0]}</p>
             </span>
           </div>
         </div>

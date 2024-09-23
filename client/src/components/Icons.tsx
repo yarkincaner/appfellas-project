@@ -5,6 +5,7 @@ import {
   ChevronDown,
   Earth,
   Hotel,
+  Loader2,
   LucideProps,
   Plane,
   PlaneLanding,
@@ -18,6 +19,7 @@ const Icons = {
   planeTakeoff: PlaneTakeoff,
   planeLanding: PlaneLanding,
   tag: Tag,
+  loader: Loader2,
   earth: (props: LucideProps) => (
     <svg
       xmlns='http://www.w3.org/2000/svg'

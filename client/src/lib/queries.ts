@@ -1,18 +1,64 @@
+import { Airline } from '@/types/airline'
 import { Destination } from '@/types/destination'
+import { FlightType } from '@/types/flight'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-export const useGetAllDestinations = () => {
+export const useGetDestinations = () => {
   return useQuery({
-    queryKey: ['get-all-destinations'],
+    queryKey: ['get-destinations'],
     queryFn: async () => {
-      // Directly use the environment variable in the template string
       const query = `${process.env.API_BASE_URL_DEVELOPMENT}/v1/destinations`
-      console.log('Requesting URL:', query)
+      const res = await axios.get(query)
 
+      return res.data.destinations as Destination[]
+    }
+  })
+}
+
+export const useGetAirlines = () => {
+  return useQuery({
+    queryKey: ['get-airlines'],
+    queryFn: async () => {
+      const query = `${process.env.API_BASE_URL_DEVELOPMENT}/v1/airlines`
+      const res = await axios.get(query)
+
+      return res.data.airlines as Airline[]
+    }
+  })
+}
+
+export const useGetFlights = (filters?: {
+  from?: string
+  to?: string
+  departureDate?: string
+  returnDate?: string
+}) => {
+  return useQuery({
+    queryKey: ['get-flights'],
+    queryFn: async () => {
+      let query = `${process.env.API_BASE_URL_DEVELOPMENT}/v1/flights`
+      const searchParams = new URLSearchParams()
+
+      if (filters?.from) {
+        searchParams.append('from', filters.from)
+      }
+
+      if (filters?.to) {
+        searchParams.append('to', filters.to)
+      }
+
+      if (filters?.departureDate) {
+        searchParams.append('departureDate', filters.departureDate)
+      }
+
+      if (filters?.returnDate) {
+        searchParams.append('returnDate', filters.returnDate)
+      }
+
+      query = `${query}?${searchParams.toString()}`
       const response = await axios.get(query)
-      console.log('Response:', response.data.destinations)
-      return response.data.destinations as Destination[]
+      return response.data.flights as FlightType[]
     }
   })
 }

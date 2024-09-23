@@ -1,5 +1,5 @@
 import BookYourFlight from './BookYourFlight'
-import Filters from './Filters'
+import Filters from './filters/Filters'
 import Flights from './Flights'
 import Header from './Header'
 import SideMenu from './SideMenu'

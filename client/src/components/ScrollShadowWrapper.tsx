@@ -42,16 +42,19 @@ const ScrollShadowWrapper: FC<Props> = ({ children, className }) => {
     <div className='relative h-full'>
       {/* Fading Overlay - Top */}
       {isScrolled && (
-        <div className='pointer-events-none absolute left-0 right-0 top-0 h-6 bg-gradient-to-b from-card' />
+        <div className='pointer-events-none absolute left-0 right-0 top-0 h-10 bg-gradient-to-b from-card' />
       )}
 
       {/* Fading Overlay - Bottom */}
       {!isBottom && (
-        <div className='pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-card' />
+        <div className='pointer-events-none absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-card' />
       )}
       <div
         ref={scrollRef}
-        className={cn('flex h-full flex-col overflow-y-auto', className)}
+        className={cn(
+          'flex h-full flex-col overflow-y-auto rounded-2xl',
+          className
+        )}
       >
         {children}
       </div>
