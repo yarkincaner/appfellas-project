@@ -6,16 +6,19 @@ import { OneWayRequest, OneWayValidator } from '@/lib/validators/one-way'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useSearchParams } from 'react-router-dom'
 
 type Props = {}
 
 const OneWay: FC<Props> = ({}) => {
+  const [_, setSearchParams] = useSearchParams()
+
   const methods = useForm<OneWayRequest>({
     resolver: zodResolver(OneWayValidator),
     defaultValues: {
       from: '',
-      to: '',
-      departureDate: new Date().toISOString()
+      route: '',
+      scheduleDate: new Date().toISOString()
     }
   })
 
@@ -27,6 +30,11 @@ const OneWay: FC<Props> = ({}) => {
 
   const onSubmit = async (data: OneWayRequest) => {
     console.log('Form Submitted:', data)
+    setSearchParams(params => {
+      params.set('scheduleDate', data.scheduleDate!)
+      params.set('route', data.route!)
+      return params
+    })
   }
 
   return (
@@ -56,22 +64,22 @@ const OneWay: FC<Props> = ({}) => {
                 icon={
                   <Icons.planeTakeoff className='left-0 ml-4 size-4 stroke-primary' />
                 }
-                name='to'
+                name='route'
               />
-              {errors.to && (
-                <span className='text-red-500'>{errors.to?.message}</span>
+              {errors.route && (
+                <span className='text-red-500'>{errors.route?.message}</span>
               )}
             </div>
           </div>
           <div className='flex flex-col gap-2 sm:flex-row'>
             <div className='flex w-full flex-col'>
               <DatePicker
-                onChange={val => setValue('departureDate', val)}
+                onChange={val => setValue('scheduleDate', val)}
                 className='py-2 sm:py-0'
               />
-              {errors.departureDate && (
+              {errors.scheduleDate && (
                 <span className='text-red-500'>
-                  {errors.departureDate?.message}
+                  {errors.scheduleDate?.message}
                 </span>
               )}
             </div>

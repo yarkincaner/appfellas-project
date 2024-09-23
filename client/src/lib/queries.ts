@@ -77,8 +77,8 @@ export const useGetFlights = (filters: FlightFilters = defaultFilters) => {
 
       query = `${query}?${searchParams.toString()}`
       console.log('MyQuery', query)
-      // const response = await axios.get(query)
-      // return response.data.flights as FlightType[]
+      const response = await axios.get(query)
+      return response.data.flights as FlightType[]
     }
   })
 }

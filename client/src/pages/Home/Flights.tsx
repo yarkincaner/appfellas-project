@@ -29,7 +29,7 @@ const Flights: FC<Props> = ({}) => {
 
   if (isLoading)
     return (
-      <Icons.loader className='size-12 self-center text-center text-primary' />
+      <Icons.loader className='size-12 animate-spin self-center text-center text-primary' />
     )
 
   if (error) {
@@ -38,8 +38,7 @@ const Flights: FC<Props> = ({}) => {
 
   return (
     <ScrollShadowWrapper className='no-scrollbar flex h-full flex-col gap-16 overflow-y-scroll'>
-      {/* {flights?.map(flight => <Flight key={flight.id} flight={flight} />)} */}
-      <div>abasd</div>
+      {flights?.map(flight => <Flight key={flight.id} flight={flight} />)}
     </ScrollShadowWrapper>
   )
 }
