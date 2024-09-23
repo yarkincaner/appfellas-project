@@ -2,6 +2,7 @@ import { Button } from '@/components/Button'
 import Card from '@/components/Card'
 import Icons from '@/components/Icons'
 import { useGetDestinations } from '@/lib/queries'
+import { formatDateTime } from '@/lib/utils'
 import { FlightType } from '@/types/flight'
 import { FC } from 'react'
 
@@ -10,23 +11,6 @@ type Props = {
 }
 
 const Flight: FC<Props> = ({ flight }) => {
-  // const {
-  //   data: destinations,
-  //   isLoading,
-  //   error
-  // } = useGetDestinations({
-  //   from: flight.prefixIATA,
-  //   to: flight.route.destinations[0]
-  // })
-
-  // if (isLoading) {
-  //   return <Icons.loader className='size-4 animate-spin text-primary' />
-  // }
-
-  // if (error) {
-  //   return <div>{error.message}</div>
-  // }
-
   return (
     <>
       <Card className='relative space-y-6 rounded-bl-none'>
@@ -39,7 +23,9 @@ const Flight: FC<Props> = ({ flight }) => {
               <Icons.planeTakeoff className='size-4' />
               <p className='text-sm'>Departure</p>
             </span>
-            <p className='font-bold'>7:30 AM</p>
+            <p className='font-bold'>
+              {formatDateTime(flight.scheduleDateTime)}
+            </p>
             <span className='flex items-center space-x-1'>
               <p>Airport:</p>
               <p>{flight.prefixIATA}</p>
@@ -63,7 +49,9 @@ const Flight: FC<Props> = ({ flight }) => {
               <Icons.planeLanding className='size-4' />
               <p className='text-sm'>Arrival</p>
             </span>
-            <p className='font-bold'>9:55 AM</p>
+            <p className='font-bold'>
+              {formatDateTime(flight.estimatedLandingTime)}
+            </p>
             <span className='flex items-center space-x-1'>
               <p>Airport:</p>
               <p>{flight.route.destinations[0]}</p>
