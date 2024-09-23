@@ -1,4 +1,4 @@
-export type Flight = {
+export type FlightType = {
   lastUpdatedAt: string // ISO date string
   actualLandingTime: string // ISO date string
   aircraftType: {

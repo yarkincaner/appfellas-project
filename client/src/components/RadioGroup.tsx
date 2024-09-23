@@ -1,16 +1,12 @@
+import { Option } from '@/types/options'
 import Radio from './Radio'
-
-type OptionType = {
-  value: string
-  label: string
-}
 
 export interface RadioGroupProps {
   defaultChecked?: string
   disabled?: boolean
   name: string
   onChange: (value: string) => void
-  options: OptionType[]
+  options: Option[]
 }
 
 const RadioGroup = (props: RadioGroupProps) => {
@@ -20,9 +16,9 @@ const RadioGroup = (props: RadioGroupProps) => {
     onChange(event.currentTarget.value)
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col gap-3'>
       {options.map(({ label: optionLabel, value }) => (
-        <div key={value} className='flex items-center gap-2'>
+        <div key={value} className='flex items-center'>
           <Radio
             id={value}
             name={name}
