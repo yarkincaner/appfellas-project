@@ -6,7 +6,7 @@ import SideMenu from './SideMenu'
 
 export default function Home() {
   return (
-    <>
+    <div className='p-6'>
       <Header />
       <div className='mt-6 grid grid-cols-1 xl:grid-cols-9 xl:space-x-8'>
         <div className='order-last col-span-7 mt-4 space-y-6 xl:order-first xl:mt-0'>
@@ -26,6 +26,6 @@ export default function Home() {
           <SideMenu />
         </div>
       </div>
-    </>
+    </div>
   )
 }
