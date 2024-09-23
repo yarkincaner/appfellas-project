@@ -22,7 +22,7 @@ const Airlines: FC<Props> = ({}) => {
   })
 
   return (
-    <label className='flex flex-col gap-1'>
+    <label className='flex flex-col gap-4'>
       <p className='font-bold'>Airlines Included</p>
       <RadioGroup
         defaultChecked={mappedAirlines[0].value}
