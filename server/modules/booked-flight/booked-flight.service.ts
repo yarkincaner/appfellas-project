@@ -16,7 +16,7 @@ export const create = async (flightData: any) => {
       // Handle duplicate key error (MongoDB error code for unique constraint violation)
       throw new ApiError(
         httpStatus.CONFLICT,
-        `Flight with id '${error.keyValue.id}' already exists`
+        `This flight has already been booked by you`
       )
     } else if (error instanceof Error) {
       // Check if error is actually an instance of Error and has a message property
