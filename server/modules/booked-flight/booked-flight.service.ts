@@ -11,8 +11,14 @@ export const create = async (flightData: any) => {
     await bookedFlight.save()
 
     return bookedFlight._id // Return the saved document
-  } catch (error) {
-    if (error instanceof Error) {
+  } catch (error: any) {
+    if (error.code === 11000 && error.keyValue.id) {
+      // Handle duplicate key error (MongoDB error code for unique constraint violation)
+      throw new ApiError(
+        httpStatus.CONFLICT,
+        `Flight with id '${error.keyValue.id}' already exists`
+      )
+    } else if (error instanceof Error) {
       // Check if error is actually an instance of Error and has a message property
       throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error.message)
     } else {
