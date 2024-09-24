@@ -80,6 +80,22 @@ const FlightList: FC<Props> = ({}) => {
     return <Icons.loader className='size-12 animate-spin text-primary' />
   if (error) return <>{error.message}</>
 
+  if (flights?.length === 0) {
+    return (
+      <div className='flex size-full flex-col items-center gap-4 sm:flex-row'>
+        <Icons.emptyFile className='w-48' />
+        <div className='flex flex-col justify-between'>
+          <h3 className='text-center text-2xl font-semibold sm:text-start'>
+            Can't find any booked flights.
+          </h3>
+          <p>
+            There are no flights booked by you or no match for these filters.
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className='flex flex-col gap-4'>
       {flights?.map(flight => <Flight flight={flight} />)}
