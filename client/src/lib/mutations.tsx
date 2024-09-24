@@ -1,9 +1,12 @@
 import { FlightType } from '@/types/flight'
 import { useMutation } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 export const useBookFlight = () => {
+  const navigate = useNavigate()
+
   return useMutation({
     mutationKey: ['create-booked-flight'],
     mutationFn: async (flight: FlightType) => {
@@ -12,8 +15,6 @@ export const useBookFlight = () => {
       return res.data as number
     },
     onError: error => {
-      // Show toast notification
-      console.log(error)
       if (error instanceof AxiosError) {
         toast.error('Something went wrong!', {
           description: error.response?.data.message
@@ -21,8 +22,8 @@ export const useBookFlight = () => {
       }
     },
     onSuccess: data => {
-      // Show toast notification and navigate to booked-flights
-      console.log('Booked flight:', data)
+      toast.success(`Booked flight successfully!`)
+      navigate('/booked-flights')
     }
   })
 }
