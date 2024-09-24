@@ -45,6 +45,8 @@ If you run the project with `npm start`, simply wait for both localhosts to be p
 
 ## Usage
 
+https://github.com/user-attachments/assets/b05d10b6-4445-4ba0-b4bf-cd83c2bb6941
+
 #### Features
 * Fetch **one way** flights.
 * Filter flights with route (IATA codes), scheduleDate, and airline.
