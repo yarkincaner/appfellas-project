@@ -1,6 +1,7 @@
 import { FlightType } from '@/types/flight'
 import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
+import { toast } from 'sonner'
 
 export const useBookFlight = () => {
   return useMutation({
@@ -12,7 +13,12 @@ export const useBookFlight = () => {
     },
     onError: error => {
       // Show toast notification
-      console.log(error.message)
+      console.log(error)
+      if (error instanceof AxiosError) {
+        toast.error('Something went wrong!', {
+          description: error.response?.data.message
+        })
+      }
     },
     onSuccess: data => {
       // Show toast notification and navigate to booked-flights
