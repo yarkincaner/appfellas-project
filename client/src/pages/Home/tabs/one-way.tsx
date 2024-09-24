@@ -18,7 +18,7 @@ const OneWay: FC<Props> = ({}) => {
     resolver: zodResolver(OneWayValidator),
     defaultValues: {
       from: '',
-      route: '',
+      to: '',
       scheduleDate: today
     }
   })
@@ -33,7 +33,19 @@ const OneWay: FC<Props> = ({}) => {
     console.log('Form Submitted:', data)
     setSearchParams(params => {
       params.set('scheduleDate', data.scheduleDate!)
-      params.set('route', data.route!)
+
+      let route: any
+      let routeString: any
+
+      if (data.from?.length === 0) {
+        routeString = data.to
+      } else if (data.to?.length === 0) {
+        routeString = data.from
+      } else {
+        route = [data.from, data.to]
+        routeString = route.join(',')
+      }
+      params.set('route', routeString)
       return params
     })
   }
@@ -65,10 +77,10 @@ const OneWay: FC<Props> = ({}) => {
                 icon={
                   <Icons.planeTakeoff className='left-0 ml-4 size-4 stroke-primary' />
                 }
-                name='route'
+                name='to'
               />
-              {errors.route && (
-                <span className='text-red-500'>{errors.route?.message}</span>
+              {errors.to && (
+                <span className='text-red-500'>{errors.to?.message}</span>
               )}
             </div>
           </div>
