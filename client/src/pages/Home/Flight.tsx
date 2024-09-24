@@ -1,7 +1,7 @@
 import { Button } from '@/components/Button'
 import Card from '@/components/Card'
 import Icons from '@/components/Icons'
-import { useGetDestinations } from '@/lib/queries'
+import { useBookFlight } from '@/lib/mutations'
 import { formatDateTime } from '@/lib/utils'
 import { FlightType } from '@/types/flight'
 import { FC } from 'react'
@@ -11,6 +11,8 @@ type Props = {
 }
 
 const Flight: FC<Props> = ({ flight }) => {
+  const { mutate: bookAFlight, isPending } = useBookFlight()
+
   return (
     <>
       <Card className='relative space-y-6 rounded-bl-none'>
@@ -64,7 +66,14 @@ const Flight: FC<Props> = ({ flight }) => {
             <p className='text-sm'>Round Trip</p>
           </div>
           <div className='absolute bottom-0 right-0'>
-            <Button className='rounded-bl-none rounded-tr-none px-10 py-9'>
+            <Button
+              className='rounded-bl-none rounded-tr-none px-10 py-9'
+              onClick={e => {
+                e.preventDefault()
+                bookAFlight(flight)
+              }}
+              isLoading={isPending}
+            >
               Book Flight
             </Button>
           </div>
