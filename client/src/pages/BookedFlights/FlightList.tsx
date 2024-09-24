@@ -1,7 +1,7 @@
 import Card from '@/components/Card'
 import Dropdown from '@/components/Dropdown'
 import Icons from '@/components/Icons'
-import { useGetFlights } from '@/lib/queries'
+import { useGetBookedFlights } from '@/lib/queries'
 import { formatDateTime } from '@/lib/utils'
 import { FlightType } from '@/types/flight'
 import { FC } from 'react'
@@ -74,7 +74,7 @@ const Flight: FC<{ flight: FlightType }> = ({ flight }) => {
 type Props = {}
 
 const FlightList: FC<Props> = ({}) => {
-  const { data: flights, isLoading, error } = useGetFlights()
+  const { data: flights, isLoading, error } = useGetBookedFlights()
 
   if (isLoading)
     return <Icons.loader className='size-12 animate-spin text-primary' />

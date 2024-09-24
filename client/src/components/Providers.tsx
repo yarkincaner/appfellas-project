@@ -12,10 +12,7 @@ const Providers: FC<Props> = ({ children }) => {
     defaultOptions: {
       queries: {
         staleTime: twentyFourHoursInMs,
-        refetchOnWindowFocus: false,
-        refetchOnMount: false,
-        refetchOnReconnect: false,
-        retry: false
+        refetchOnWindowFocus: false
       }
     }
   })

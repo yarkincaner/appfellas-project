@@ -1,10 +1,11 @@
 import { FlightType } from '@/types/flight'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 export const useBookFlight = () => {
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
 
   return useMutation({
@@ -21,7 +22,10 @@ export const useBookFlight = () => {
         })
       }
     },
-    onSuccess: data => {
+    onSuccess: async data => {
+      await queryClient.invalidateQueries({
+        queryKey: ['get-booked-flights']
+      })
       toast.success(`Booked flight successfully!`)
       navigate('/booked-flights')
     }

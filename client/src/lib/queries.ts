@@ -82,3 +82,15 @@ export const useGetFlights = (filters: FlightFilters = defaultFilters) => {
     }
   })
 }
+
+export const useGetBookedFlights = () => {
+  return useQuery({
+    queryKey: ['get-booked-flights'],
+    queryFn: async () => {
+      const query = `${process.env.API_BASE_URL_DEVELOPMENT}/v1/booked-flight`
+
+      const res = await axios.get(query)
+      return res.data as FlightType[]
+    }
+  })
+}
