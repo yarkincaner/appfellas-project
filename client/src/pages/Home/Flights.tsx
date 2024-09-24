@@ -4,7 +4,7 @@ import Flight from './Flight'
 import { useGetFlights } from '@/lib/queries'
 import Icons from '@/components/Icons'
 import { useSearchParams } from 'react-router-dom'
-import { FlightFilters, SortOptions } from '@/types/flight'
+import { FlightFilters, FlightType, SortOptions } from '@/types/flight'
 
 type Props = {}
 
@@ -36,9 +36,21 @@ const Flights: FC<Props> = ({}) => {
     return <div>{error.message}</div>
   }
 
+  if (flights?.length === 0) {
+    return (
+      <div className='flex size-full flex-col items-center justify-center'>
+        <Icons.emptyFile className='max-w-72' />
+        <h3 className='font-semibold'>There's no flight like this</h3>
+        <p>Try changing your filters to see appointments</p>
+      </div>
+    )
+  }
+
   return (
     <ScrollShadowWrapper className='no-scrollbar flex h-full flex-col gap-16 overflow-y-scroll'>
-      {flights?.map(flight => <Flight key={flight.id} flight={flight} />)}
+      {flights?.map((flight: FlightType) => (
+        <Flight key={flight.id} flight={flight} />
+      ))}
     </ScrollShadowWrapper>
   )
 }

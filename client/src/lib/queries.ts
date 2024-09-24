@@ -76,9 +76,15 @@ export const useGetFlights = (filters: FlightFilters = defaultFilters) => {
       }
 
       query = `${query}?${searchParams.toString()}`
-      console.log('MyQuery', query)
-      const response = await axios.get(query)
-      return response.data.flights as FlightType[]
+      try {
+        const response = await axios.get(query)
+
+        return response.data?.flights ?? []
+      } catch (error) {
+        // Handle error (optional: you could log this or return an empty array)
+        console.error('Error fetching flights:', error)
+        return []
+      }
     }
   })
 }

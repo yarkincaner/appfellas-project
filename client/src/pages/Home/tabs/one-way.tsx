@@ -2,6 +2,7 @@ import { Button } from '@/components/Button'
 import DatePicker from '@/components/DatePicker'
 import Icons from '@/components/Icons'
 import Input from '@/components/Input'
+import { today } from '@/config/config'
 import { OneWayRequest, OneWayValidator } from '@/lib/validators/one-way'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FC } from 'react'
@@ -18,7 +19,7 @@ const OneWay: FC<Props> = ({}) => {
     defaultValues: {
       from: '',
       route: '',
-      scheduleDate: new Date().toISOString()
+      scheduleDate: today
     }
   })
 
