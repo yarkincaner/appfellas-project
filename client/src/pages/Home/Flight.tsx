@@ -13,11 +13,21 @@ type Props = {
 const Flight: FC<Props> = ({ flight }) => {
   const { mutate: bookAFlight, isPending } = useBookFlight()
 
+  let takeOffCity: string
+  const landingCity =
+    flight.route.destinations[flight.route.destinations.length - 1]
+
+  if (flight.route.destinations.length === 1) {
+    takeOffCity = 'AMS'
+  } else {
+    takeOffCity = flight.route.destinations[0]
+  }
+
   return (
     <>
       <Card className='relative space-y-6 rounded-bl-none'>
         <h3 className='font-bold'>
-          {flight.prefixIATA} - {flight.route.destinations[0]}
+          {takeOffCity} - {landingCity}
         </h3>
         <div className='grid grid-cols-10 items-center justify-center space-x-4'>
           <div className='col-span-2 flex flex-col justify-self-start'>
@@ -30,7 +40,7 @@ const Flight: FC<Props> = ({ flight }) => {
             </p>
             <span className='flex items-center space-x-1'>
               <p>Airport:</p>
-              <p>{flight.prefixIATA}</p>
+              <p>{takeOffCity}</p>
             </span>
           </div>
           <div className='col-span-2 h-px w-1/2 justify-self-center bg-foreground' />
@@ -56,7 +66,7 @@ const Flight: FC<Props> = ({ flight }) => {
             </p>
             <span className='flex items-center space-x-1'>
               <p>Airport:</p>
-              <p>{flight.route.destinations[0]}</p>
+              <p>{landingCity}</p>
             </span>
           </div>
         </div>

@@ -75,6 +75,8 @@ export const useGetFlights = (filters: FlightFilters = defaultFilters) => {
         )
       }
 
+      searchParams.append('flightDirection', 'D')
+
       query = `${query}?${searchParams.toString()}`
       try {
         const response = await axios.get(query)
