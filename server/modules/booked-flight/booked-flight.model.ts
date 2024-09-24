@@ -103,7 +103,7 @@ const flightSchema = new Schema(
     flightNumber: { type: Number },
     gate: { type: String },
     pier: { type: String },
-    id: { type: String },
+    id: { type: String, required: true, unique: true },
     isOperationalFlight: { type: Boolean },
     mainFlight: { type: String },
     prefixIATA: { type: String },
