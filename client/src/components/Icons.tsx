@@ -7,6 +7,7 @@ import {
   Info,
   Loader2,
   LucideProps,
+  Palette,
   Plane,
   PlaneLanding,
   PlaneTakeoff,
@@ -44,7 +45,8 @@ const Icons = {
   travel: TreePalm,
   check: Check,
   calendar: CalendarDays,
-  chevronDown: ChevronDown
+  chevronDown: ChevronDown,
+  palette: Palette
 }
 
 export default Icons
