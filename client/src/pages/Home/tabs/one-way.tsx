@@ -75,7 +75,7 @@ const OneWay: FC<Props> = ({}) => {
                 className='sm:rounded-l-none'
                 placeholder='to ...'
                 icon={
-                  <Icons.planeTakeoff className='left-0 ml-4 size-4 stroke-primary' />
+                  <Icons.planeLanding className='left-0 ml-4 size-4 stroke-primary' />
                 }
                 name='to'
               />
