@@ -26,7 +26,7 @@ const Input: FC<Props> = ({
         type={type}
         {...register(name)} // Register input with form
         className={cn(
-          'w-full rounded-3xl border border-foreground/20 bg-card/25 py-1.5 pl-10 text-sm/6 text-foreground focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-foreground/25',
+          'w-full rounded-3xl border-2 border-foreground/20 bg-transparent py-1.5 pl-10 text-sm/6 text-foreground focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-foreground/25',
           className
         )}
         placeholder={placeholder}

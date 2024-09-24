@@ -30,7 +30,7 @@ const DatePicker: FC<Props> = ({ className, name, value, onChange }) => {
   return (
     <span
       className={cn(
-        'box-border flex h-full w-full cursor-pointer items-center space-x-2 rounded-3xl border border-foreground/20 bg-card/25 px-2',
+        'box-border flex h-full w-full cursor-pointer items-center space-x-2 rounded-3xl border-2 border-foreground/20 bg-transparent px-2',
         className
       )}
       onClick={handleDatePicker}
