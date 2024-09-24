@@ -35,7 +35,7 @@ const Rating: FC<Props> = ({}) => {
   const starData = [2, 3, 4, 5, 6]
 
   return (
-    <div className='grid grid-cols-5 divide-x-2 divide-card'>
+    <div className='grid grid-cols-5 items-center justify-center divide-x-2 divide-card'>
       {starData.map((filledCount, index) => (
         <StarColumn key={index} filledCount={filledCount} />
       ))}
